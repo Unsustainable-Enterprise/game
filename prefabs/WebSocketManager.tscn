@@ -3,11 +3,9 @@
 [ext_resource path="res://scripts/Client.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Messages.gd" type="Script" id=2]
 
-[node name="WebSocket" type="Node2D"]
+[node name="WebSocketManager" type="Node2D"]
 script = ExtResource( 1 )
 message_path = NodePath("Messages")
 
 [node name="Messages" type="Node" parent="."]
 script = ExtResource( 2 )
-
-[node name="Test" type="Node" parent="Messages"]

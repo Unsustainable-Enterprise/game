@@ -24,11 +24,3 @@ func create_lobby():
 # func send_message():
 # 	print("send_message")
 
-func _ready():
-	# warning-ignore:return_value_discarded
-	get_parent().connect("web_socket_ready", self, "_on_web_socket_ready")
-		
-
-func _on_web_socket_ready():
-	create_lobby()
-	

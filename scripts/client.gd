@@ -1,7 +1,6 @@
 extends Node2D
 
 export var message_path: NodePath
-
 onready var message_node: Node = get_node(message_path)
 
 var URL = "wss://localhost:3000"

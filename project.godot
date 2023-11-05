@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="Game"
+run/main_scene="res://scenes/scene1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+WebSocketManager="*res://prefabs/WebSocketManager.tscn"
 
 [gui]
 
