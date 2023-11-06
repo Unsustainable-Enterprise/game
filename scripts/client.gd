@@ -35,7 +35,11 @@ func _on_connected(_protocol):
 
 
 func _on_data():
-	print("Received data : ", _client.get_peer(1).get_packet().get_string_from_utf8())
+	var data = _client.get_peer(1).get_packet().get_string_from_utf8()
+	print("Received data : ", data)
+	var json = JSON.parse(data)
+	if json.error == OK:
+		print(json.result.event)
 
 
 func send(json):

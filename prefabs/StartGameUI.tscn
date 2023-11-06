@@ -6,12 +6,64 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+scenario_path = NodePath("CreateLobbyCanvas/ScenarioSelector")
+name_input_path = NodePath("CreateLobbyCanvas/NameInput")
+win_pct_slider_path = NodePath("CreateLobbyCanvas/WinPercentageSlider")
+create_lobby_btn_path = NodePath("CreateLobbyCanvas/CreateLobbyBtn")
+host_btn_path = NodePath("HostBtn")
+join_btn_path = NodePath("JoinBtn")
+create_lobby_canvas_path = NodePath("CreateLobbyCanvas")
 
-[node name="Button" type="Button" parent="."]
-margin_left = 163.0
-margin_top = 165.0
-margin_right = 279.0
-margin_bottom = 203.0
+[node name="JoinBtn" type="Button" parent="."]
+margin_left = 651.0
+margin_top = 273.0
+margin_right = 791.0
+margin_bottom = 317.0
+rect_pivot_offset = Vector2( -365, -68 )
+text = "Join"
+
+[node name="HostBtn" type="Button" parent="."]
+margin_left = 186.0
+margin_top = 267.0
+margin_right = 326.0
+margin_bottom = 311.0
+rect_pivot_offset = Vector2( -365, -68 )
+text = "Host"
+
+[node name="CreateLobbyCanvas" type="CanvasLayer" parent="."]
+
+[node name="CreateLobbyBtn" type="Button" parent="CreateLobbyCanvas"]
+margin_left = 430.0
+margin_top = 532.0
+margin_right = 546.0
+margin_bottom = 570.0
 text = "Create Lobby"
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="WinPercentageSlider" type="HSlider" parent="CreateLobbyCanvas"]
+margin_left = 97.0
+margin_top = 35.0
+margin_right = 310.0
+margin_bottom = 75.0
+
+[node name="ScenarioSelector" type="OptionButton" parent="CreateLobbyCanvas"]
+margin_left = 173.0
+margin_top = 123.0
+margin_right = 448.0
+margin_bottom = 160.0
+text = "Select scenario"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="NameInput" type="LineEdit" parent="CreateLobbyCanvas"]
+margin_left = 179.0
+margin_top = 199.0
+margin_right = 475.0
+margin_bottom = 230.0
+placeholder_text = "Write your name"
+
+[connection signal="pressed" from="HostBtn" to="." method="_on_HostBtn_pressed"]
+[connection signal="pressed" from="CreateLobbyCanvas/CreateLobbyBtn" to="." method="_on_Button_pressed"]
+[connection signal="drag_ended" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_drag_ended"]
+[connection signal="item_selected" from="CreateLobbyCanvas/ScenarioSelector" to="." method="_on_OptionButton_item_selected"]
+[connection signal="text_changed" from="CreateLobbyCanvas/NameInput" to="." method="_on_LineEdit_text_changed"]

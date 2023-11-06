@@ -16,6 +16,10 @@ func create_lobby():
 	}
 	get_parent().send(createJson)
 
+func create_lobby_response(data):
+	print("create_lobby_response")
+	print(data)
+
 
 # func join_lobby():
 # 	print("join_lobby")
