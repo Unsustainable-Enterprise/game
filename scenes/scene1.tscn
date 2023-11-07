@@ -5,5 +5,3 @@
 [node name="Scene1" type="Node2D"]
 
 [node name="StartGameUI" parent="." instance=ExtResource( 2 )]
-
-[editable path="StartGameUI"]
