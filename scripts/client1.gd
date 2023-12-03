@@ -22,7 +22,7 @@ func _ready():
 		print("Unable to connect")
 		set_process(false)
 	
-func _process(delta):
+func _process(_delta):
 	_client.poll()
 
 func _on_connection_closed(was_clean = false):
@@ -40,6 +40,10 @@ func _on_data():
 	if json.error == OK:
 		match json.result.event:
 			web_socket_events.CREATE_LOBBY:
+				message_node.create_lobby_response(json.result)
+			web_socket_events.JOINED_LOBBY:
+				message_node.create_lobby_response(json.result)
+			web_socket_events.PARTICIPANT_JOINED_LOBBY:
 				message_node.create_lobby_response(json.result)
 			_:
 				print("Unknown event with data: ", json.result)
