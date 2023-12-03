@@ -156,13 +156,12 @@ margin_right = 672.0
 margin_bottom = 240.0
 placeholder_text = "Write lobby's Pin"
 
-[connection signal="pressed" from="JoinBtn" to="." method="_on_JoinBtn_pressed"]
-[connection signal="pressed" from="HostBtn" to="." method="_on_HostBtn_pressed"]
+[connection signal="pressed" from="JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="text_changed" from="CreateLobbyCanvas/NameInput" to="." method="_on_user_name_text_changed"]
-[connection signal="drag_ended" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_drag_ended"]
-[connection signal="value_changed" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_value_changed"]
-[connection signal="item_selected" from="CreateLobbyCanvas/ScenarioSelector" to="." method="_on_OptionButton_item_selected"]
-[connection signal="pressed" from="CreateLobbyCanvas/CreateLobbyBtn" to="." method="_on_CreateLobbyBtn_pressed"]
+[connection signal="value_changed" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_win_percentage_slider_value_changed"]
+[connection signal="item_selected" from="CreateLobbyCanvas/ScenarioSelector" to="." method="_on_scenario_selector_item_selected"]
+[connection signal="pressed" from="CreateLobbyCanvas/CreateLobbyBtn" to="." method="_on_create_lobby_btn_pressed"]
 [connection signal="text_changed" from="JoinLobbyCanvas/NameInput" to="." method="_on_user_name_text_changed"]
-[connection signal="pressed" from="JoinLobbyCanvas/JoinLobbyBtn" to="." method="_on_JoinLobbyBtn_pressed"]
+[connection signal="pressed" from="JoinLobbyCanvas/JoinLobbyBtn" to="." method="_on_join_lobby_btn_pressed"]
 [connection signal="text_changed" from="JoinLobbyCanvas/PinInput" to="." method="_on_pin_text_changed"]

@@ -57,7 +57,7 @@ func add_scenario_options():
 # 	#warning-ignore:return_value_discarded
 # 	get_parent().connect("web_socket_ready", self, "_on_web_socket_ready")
 
-func _on_OptionButton_item_selected(index:int):
+func _on_scenario_selector_item_selected(index:int):
 	if(index != -1):
 		scenario = scenario_selector.get_item_text(index)
 	else:
@@ -67,11 +67,11 @@ func _on_user_name_text_changed(new_text:String):
 	if(new_text.length() != 0):
 		user_name = new_text
 
-func _on_HostBtn_pressed():
+func _on_host_btn_pressed():
 	disable_first_btns()
 	create_lobby_canvas.visible = true;
 
-func _on_CreateLobbyBtn_pressed():
+func _on_create_lobby_btn_pressed():
 	if(user_name.length() == 0):
 		error_message_create.text = "Please enter a name"
 	elif(scenario.length() == 0):
@@ -79,11 +79,11 @@ func _on_CreateLobbyBtn_pressed():
 	else:
 		web_socket_manager.message_node.create_lobby(user_name, scenario, win_percentage)
 
-func _on_WinPercentageSlider_value_changed(value:float):
+func _on_win_percentage_slider_value_changed(value:float):
 	win_pct_slider_text.text = str(win_pct_slider.value) + "%"
 	win_percentage = value
 
-func _on_JoinLobbyBtn_pressed():
+func _on_join_lobby_btn_pressed():
 	if(user_name.length() == 0):
 		error_message_join.text = "Please enter a name"
 	elif(pin.length() == 0):
@@ -99,6 +99,6 @@ func _on_pin_text_changed(new_text:String):
 	if(new_text.length() != 0):
 		pin = new_text
 
-func _on_JoinBtn_pressed():
+func _on_join_btn_pressed():
 	disable_first_btns()
 	join_lobby_canvas.visible = true;
