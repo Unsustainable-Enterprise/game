@@ -33,6 +33,14 @@ func join_lobby(user_name: String, pin: String) -> void:
     }
 	get_parent().send(joinJson)
 
+func join_lobby_response(data):
+		print("join_lobby_response")
+		print(data)
+
+func participant_joined_lobby_response(data):
+	print("participant_joined_lobby")
+	print(data)
+
 
 # func send_message():
 # 	print("send_message")

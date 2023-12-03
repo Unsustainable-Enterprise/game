@@ -41,10 +41,10 @@ func _on_data():
 		match json.result.event:
 			web_socket_events.CREATE_LOBBY:
 				message_node.create_lobby_response(json.result)
-			web_socket_events.JOINED_LOBBY:
-				message_node.create_lobby_response(json.result)
+			web_socket_events.JOIN_LOBBY:
+				message_node.join_lobby_response(json.result)
 			web_socket_events.PARTICIPANT_JOINED_LOBBY:
-				message_node.create_lobby_response(json.result)
+				message_node.participant_joined_lobby(json.result)
 			_:
 				print("Unknown event with data: ", json.result)
 
