@@ -10,12 +10,15 @@ script = ExtResource( 1 )
 scenario_path = NodePath("CreateLobbyCanvas/ScenarioSelector")
 win_pct_slider_text_path = NodePath("CreateLobbyCanvas/WinPercentageText")
 name_input_path = NodePath("CreateLobbyCanvas/NameInput")
+pin_input_parth = NodePath("JoinLobbyCanvas/PinInput")
 win_pct_slider_path = NodePath("CreateLobbyCanvas/WinPercentageSlider")
 create_lobby_btn_path = NodePath("CreateLobbyCanvas/CreateLobbyBtn")
 host_btn_path = NodePath("HostBtn")
 join_btn_path = NodePath("JoinBtn")
 create_lobby_canvas_path = NodePath("CreateLobbyCanvas")
-error_message_path = NodePath("CreateLobbyCanvas/ErrorMessage")
+join_lobby_canvas_path = NodePath("JoinLobbyCanvas")
+error_message_create_path = NodePath("CreateLobbyCanvas/ErrorMessageCreate")
+error_message_join_path = NodePath("JoinLobbyCanvas/ErrorMessageJoin")
 
 [node name="JoinBtn" type="Button" parent="."]
 margin_left = 651.0
@@ -34,6 +37,7 @@ rect_pivot_offset = Vector2( -365, -68 )
 text = "Host"
 
 [node name="CreateLobbyCanvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="NameInput" type="LineEdit" parent="CreateLobbyCanvas"]
 margin_left = 374.0
@@ -96,7 +100,7 @@ margin_right = 478.0
 margin_bottom = 307.0
 text = "Win percentage"
 
-[node name="ErrorMessage" type="Label" parent="CreateLobbyCanvas"]
+[node name="ErrorMessageCreate" type="Label" parent="CreateLobbyCanvas"]
 margin_left = 377.0
 margin_top = 341.0
 margin_right = 497.0
@@ -105,9 +109,60 @@ rect_pivot_offset = Vector2( 34, 14 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 
+[node name="JoinLobbyCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="UserNameLabel" type="Label" parent="JoinLobbyCanvas"]
+margin_left = 371.0
+margin_top = 112.0
+margin_right = 441.0
+margin_bottom = 126.0
+text = "User name"
+
+[node name="NameInput" type="LineEdit" parent="JoinLobbyCanvas"]
+margin_left = 374.0
+margin_top = 134.0
+margin_right = 670.0
+margin_bottom = 165.0
+placeholder_text = "Write your name"
+
+[node name="JoinLobbyBtn" type="Button" parent="JoinLobbyCanvas"]
+margin_left = 459.0
+margin_top = 286.0
+margin_right = 575.0
+margin_bottom = 324.0
+text = "Join Lobby"
+
+[node name="ErrorMessageJoin" type="Label" parent="JoinLobbyCanvas"]
+margin_left = 374.0
+margin_top = 174.0
+margin_right = 494.0
+margin_bottom = 188.0
+rect_pivot_offset = Vector2( 34, 14 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+
+[node name="PinLabel" type="Label" parent="JoinLobbyCanvas"]
+margin_left = 373.0
+margin_top = 187.0
+margin_right = 443.0
+margin_bottom = 201.0
+text = "Pin"
+
+[node name="PinInput" type="LineEdit" parent="JoinLobbyCanvas"]
+margin_left = 376.0
+margin_top = 209.0
+margin_right = 672.0
+margin_bottom = 240.0
+placeholder_text = "Write lobby's Pin"
+
+[connection signal="pressed" from="JoinBtn" to="." method="_on_JoinBtn_pressed"]
 [connection signal="pressed" from="HostBtn" to="." method="_on_HostBtn_pressed"]
-[connection signal="text_changed" from="CreateLobbyCanvas/NameInput" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_changed" from="CreateLobbyCanvas/NameInput" to="." method="_on_user_name_text_changed"]
 [connection signal="drag_ended" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_drag_ended"]
 [connection signal="value_changed" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_value_changed"]
 [connection signal="item_selected" from="CreateLobbyCanvas/ScenarioSelector" to="." method="_on_OptionButton_item_selected"]
 [connection signal="pressed" from="CreateLobbyCanvas/CreateLobbyBtn" to="." method="_on_CreateLobbyBtn_pressed"]
+[connection signal="text_changed" from="JoinLobbyCanvas/NameInput" to="." method="_on_user_name_text_changed"]
+[connection signal="pressed" from="JoinLobbyCanvas/JoinLobbyBtn" to="." method="_on_JoinLobbyBtn_pressed"]
+[connection signal="text_changed" from="JoinLobbyCanvas/PinInput" to="." method="_on_pin_text_changed"]

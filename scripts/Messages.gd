@@ -1,10 +1,10 @@
 extends Node
 
-var client_node = null
+var web_socket_events = load("res://scripts/WebSocketEvents.gd")
 
-func create_lobby(user_name, scenario, win_percentage):
+func create_lobby(user_name: String, scenario: String, win_percentage: float) -> void:
 	var createJson = {
-		"event": "create_lobby",
+		"event": web_socket_events.CREATE_LOBBY,
 		"message": {
 			"data": {
 				"name": user_name,
@@ -21,8 +21,17 @@ func create_lobby_response(data):
 	print(data)
 
 
-# func join_lobby():
-# 	print("join_lobby")
+func join_lobby(user_name: String, pin: String) -> void:
+	var joinJson = {
+		"event": web_socket_events.JOIN_LOBBY,
+		"message": {
+			"data": {
+				"name": user_name,
+				"pin": pin
+			}
+		}
+    }
+	get_parent().send(joinJson)
 
 
 # func send_message():

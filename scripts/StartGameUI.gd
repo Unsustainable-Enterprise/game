@@ -11,6 +11,9 @@ onready var win_pct_slider_text: Label = get_node(win_pct_slider_text_path)
 export var name_input_path: NodePath
 onready var name_input: LineEdit = get_node(name_input_path)
 
+export var pin_input_parth: NodePath
+onready var pin_input: LineEdit = get_node(pin_input_parth)
+
 export var win_pct_slider_path: NodePath
 onready var win_pct_slider: Slider = get_node(win_pct_slider_path)
 
@@ -26,18 +29,23 @@ onready var join_btn: Button = get_node(join_btn_path)
 export var create_lobby_canvas_path: NodePath
 onready var create_lobby_canvas: CanvasLayer = get_node(create_lobby_canvas_path)
 
-export var error_message_path: NodePath
-onready var error_message_text: Label = get_node(error_message_path)
+export var join_lobby_canvas_path: NodePath
+onready var join_lobby_canvas: CanvasLayer = get_node(join_lobby_canvas_path)
+
+export var error_message_create_path: NodePath
+onready var error_message_create: Label = get_node(error_message_create_path)
+
+export var error_message_join_path: NodePath
+onready var error_message_join: Label = get_node(error_message_join_path)
 
 var user_name: String
 var scenario: String
 var win_percentage: float
-
+var pin: String
 
 func _ready():
 	add_scenario_options()
 	create_lobby_canvas.visible = false
-
 
 func add_scenario_options():
 	scenario_selector.add_item("Hello")
@@ -45,11 +53,9 @@ func add_scenario_options():
 	scenario_selector.select(-1)
 	scenario_selector.text = "Select Scenario"
 
-
 # func _ready():
 # 	#warning-ignore:return_value_discarded
 # 	get_parent().connect("web_socket_ready", self, "_on_web_socket_ready")
-
 
 func _on_OptionButton_item_selected(index:int):
 	if(index != -1):
@@ -57,29 +63,42 @@ func _on_OptionButton_item_selected(index:int):
 	else:
 		print('no scenario selected')
 
-
-func _on_LineEdit_text_changed(new_text:String):
+func _on_user_name_text_changed(new_text:String):
 	if(new_text.length() != 0):
 		user_name = new_text
-	else:
-		print('empty name')
-
 
 func _on_HostBtn_pressed():
-	host_btn.visible = false;
-	join_btn.visible = false;
+	disable_first_btns()
 	create_lobby_canvas.visible = true;
-
 
 func _on_CreateLobbyBtn_pressed():
 	if(user_name.length() == 0):
-		error_message_text.text = "Please enter a name"
+		error_message_create.text = "Please enter a name"
 	elif(scenario.length() == 0):
-		error_message_text.text = "Please select a scenario"
+		error_message_create.text = "Please select a scenario"
 	else:
 		web_socket_manager.message_node.create_lobby(user_name, scenario, win_percentage)
-
 
 func _on_WinPercentageSlider_value_changed(value:float):
 	win_pct_slider_text.text = str(win_pct_slider.value) + "%"
 	win_percentage = value
+
+func _on_JoinLobbyBtn_pressed():
+	if(user_name.length() == 0):
+		error_message_join.text = "Please enter a name"
+	elif(pin.length() == 0):
+		error_message_join.text = "Please enter a pin"
+	else:
+		web_socket_manager.message_node.join_lobby(user_name, pin)
+
+func disable_first_btns():
+	host_btn.visible = false;
+	join_btn.visible = false;
+
+func _on_pin_text_changed(new_text:String):
+	if(new_text.length() != 0):
+		pin = new_text
+
+func _on_JoinBtn_pressed():
+	disable_first_btns()
+	join_lobby_canvas.visible = true;
