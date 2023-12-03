@@ -15,6 +15,7 @@ create_lobby_btn_path = NodePath("CreateLobbyCanvas/CreateLobbyBtn")
 host_btn_path = NodePath("HostBtn")
 join_btn_path = NodePath("JoinBtn")
 create_lobby_canvas_path = NodePath("CreateLobbyCanvas")
+error_message_path = NodePath("CreateLobbyCanvas/ErrorMessage")
 
 [node name="JoinBtn" type="Button" parent="."]
 margin_left = 651.0
@@ -42,25 +43,26 @@ margin_bottom = 165.0
 placeholder_text = "Write your name"
 
 [node name="WinPercentageSlider" type="HSlider" parent="CreateLobbyCanvas"]
-margin_left = 373.0
-margin_top = 258.0
-margin_right = 633.0
-margin_bottom = 298.0
+margin_left = 376.0
+margin_top = 298.0
+margin_right = 636.0
+margin_bottom = 338.0
 value = 51.0
 
 [node name="WinPercentageText" type="Label" parent="CreateLobbyCanvas"]
-margin_left = 633.0
-margin_top = 271.0
-margin_right = 668.0
-margin_bottom = 285.0
+margin_left = 636.0
+margin_top = 311.0
+margin_right = 671.0
+margin_bottom = 325.0
+rect_pivot_offset = Vector2( 34, 14 )
 text = "51%"
 align = 1
 
 [node name="ScenarioSelector" type="OptionButton" parent="CreateLobbyCanvas"]
-margin_left = 369.0
-margin_top = 208.0
-margin_right = 666.0
-margin_bottom = 245.0
+margin_left = 375.0
+margin_top = 225.0
+margin_right = 672.0
+margin_bottom = 262.0
 text = "Select scenario"
 __meta__ = {
 "_editor_description_": ""
@@ -81,22 +83,31 @@ margin_bottom = 126.0
 text = "User name"
 
 [node name="ScenarioLabel" type="Label" parent="CreateLobbyCanvas"]
-margin_left = 371.0
-margin_top = 186.0
-margin_right = 441.0
-margin_bottom = 200.0
+margin_left = 377.0
+margin_top = 203.0
+margin_right = 447.0
+margin_bottom = 217.0
 text = "Scenario"
 
 [node name="WinPercentageLabel" type="Label" parent="CreateLobbyCanvas"]
-margin_left = 375.0
-margin_top = 253.0
-margin_right = 475.0
-margin_bottom = 267.0
+margin_left = 378.0
+margin_top = 293.0
+margin_right = 478.0
+margin_bottom = 307.0
 text = "Win percentage"
+
+[node name="ErrorMessage" type="Label" parent="CreateLobbyCanvas"]
+margin_left = 377.0
+margin_top = 341.0
+margin_right = 497.0
+margin_bottom = 355.0
+rect_pivot_offset = Vector2( 34, 14 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 
 [connection signal="pressed" from="HostBtn" to="." method="_on_HostBtn_pressed"]
 [connection signal="text_changed" from="CreateLobbyCanvas/NameInput" to="." method="_on_LineEdit_text_changed"]
 [connection signal="drag_ended" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_drag_ended"]
 [connection signal="value_changed" from="CreateLobbyCanvas/WinPercentageSlider" to="." method="_on_WinPercentageSlider_value_changed"]
 [connection signal="item_selected" from="CreateLobbyCanvas/ScenarioSelector" to="." method="_on_OptionButton_item_selected"]
-[connection signal="pressed" from="CreateLobbyCanvas/CreateLobbyBtn" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CreateLobbyCanvas/CreateLobbyBtn" to="." method="_on_CreateLobbyBtn_pressed"]

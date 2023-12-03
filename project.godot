@@ -18,13 +18,17 @@ config/icon="res://icon.png"
 
 WebSocketManager="*res://prefabs/WebSocketManager.tscn"
 
+[global]
+
+cert=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
 
 [network]
 
-ssl/certificates="res://certificate.crt"
+ssl/certificates="res://cert.crt"
 
 [physics]
 

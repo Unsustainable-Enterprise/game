@@ -2,15 +2,15 @@ extends Node
 
 var client_node = null
 
-func create_lobby():
+func create_lobby(user_name, scenario, win_percentage):
 	var createJson = {
 		"event": "create_lobby",
 		"message": {
 			"data": {
-				"name": "Name",
-				"scenario": "scenario",
+				"name": user_name,
+				"scenario": scenario,
 				"totalQuestions": 10,
-				"winPercentage": 51
+				"winPercentage": win_percentage
 			}
 		}
 	}

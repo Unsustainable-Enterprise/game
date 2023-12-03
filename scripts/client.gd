@@ -20,7 +20,6 @@ func _ready():
 		set_process(false)
 	
 
-
 func _process(delta):
 	_client.poll()
 

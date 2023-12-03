@@ -26,6 +26,9 @@ onready var join_btn: Button = get_node(join_btn_path)
 export var create_lobby_canvas_path: NodePath
 onready var create_lobby_canvas: CanvasLayer = get_node(create_lobby_canvas_path)
 
+export var error_message_path: NodePath
+onready var error_message_text: Label = get_node(error_message_path)
+
 var user_name: String
 var scenario: String
 var win_percentage: float
@@ -64,14 +67,17 @@ func _on_LineEdit_text_changed(new_text:String):
 
 func _on_HostBtn_pressed():
 	host_btn.visible = false;
+	join_btn.visible = false;
 	create_lobby_canvas.visible = true;
 
 
 func _on_CreateLobbyBtn_pressed():
-	#web_socket_manager.message_node.create_lobby()
-	print('name ', user_name)
-	print('scenario ', scenario)
-	print('win percentage ', win_percentage)
+	if(user_name.length() == 0):
+		error_message_text.text = "Please enter a name"
+	elif(scenario.length() == 0):
+		error_message_text.text = "Please select a scenario"
+	else:
+		web_socket_manager.message_node.create_lobby(user_name, scenario, win_percentage)
 
 
 func _on_WinPercentageSlider_value_changed(value:float):
