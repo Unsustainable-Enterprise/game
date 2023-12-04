@@ -77,7 +77,7 @@ func _on_create_lobby_btn_pressed():
 	elif(scenario.length() == 0):
 		error_message_create.text = "Please select a scenario"
 	else:
-		web_socket_manager.message_node.create_lobby(user_name, scenario, win_percentage)
+		web_socket_manager.send_message.create_lobby(user_name, scenario, win_percentage)
 
 func _on_win_percentage_slider_value_changed(value:float):
 	win_pct_slider_text.text = str(win_pct_slider.value) + "%"
@@ -89,7 +89,7 @@ func _on_join_lobby_btn_pressed():
 	elif(pin.length() == 0):
 		error_message_join.text = "Please enter a pin"
 	else:
-		web_socket_manager.message_node.join_lobby(user_name, pin)
+		web_socket_manager.send_message.join_lobby(user_name, pin)
 
 func disable_first_btns():
 	host_btn.visible = false;

@@ -1,7 +1,10 @@
 extends Node2D
 
-export var message_path: NodePath
-onready var message_node: Node = get_node(message_path)
+export var send_message_path: NodePath
+onready var send_message: Node = get_node(send_message_path)
+
+export var receive_message_path: NodePath
+onready var receive_message: Node = get_node(receive_message_path)
 
 var web_socket_events = load("res://scripts/WebSocketEvents.gd")
 
@@ -40,11 +43,11 @@ func _on_data():
 	if json.error == OK:
 		match json.result.event:
 			web_socket_events.CREATE_LOBBY:
-				message_node.create_lobby_response(json.result)
+				receive_message.create_lobby(json.result)
 			web_socket_events.JOIN_LOBBY:
-				message_node.join_lobby_response(json.result)
+				receive_message.join_lobby(json.result)
 			web_socket_events.PARTICIPANT_JOINED_LOBBY:
-				message_node.participant_joined_lobby(json.result)
+				receive_message.participant_joined_lobby(json.result)
 			_:
 				print("Unknown event with data: ", json.result)
 

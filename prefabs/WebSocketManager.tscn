@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Client.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Messages.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ReceiveMessages.gd" type="Script" id=2]
+[ext_resource path="res://scripts/SendMessages.gd" type="Script" id=3]
 
 [node name="WebSocketManager" type="Node2D"]
 script = ExtResource( 1 )
-message_path = NodePath("Messages")
+send_message_path = NodePath("SendMessages")
+receive_message_path = NodePath("ReceiveMessages")
 
-[node name="Messages" type="Node" parent="."]
+[node name="SendMessages" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="ReceiveMessages" type="Node" parent="."]
 script = ExtResource( 2 )
