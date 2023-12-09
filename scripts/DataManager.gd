@@ -8,6 +8,8 @@ var participants setget set_participants, get_participants
 
 var is_host setget set_is_host, get_is_host
 
+var pin setget set_pin, get_pin
+
 func set_user_name(name):
 	user_name = name
 
@@ -33,3 +35,9 @@ func set_is_host(value):
 
 func get_is_host():
    return is_host
+
+func set_pin(value):
+	pin = value
+
+func get_pin():
+   return pin

@@ -7,6 +7,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 participant_names_path = NodePath("ParticipantNames")
+start_lobby_path = NodePath("StartLobby")
+exit_lobby_path = NodePath("ExitLobby")
 
 [node name="ParticipantNames" type="RichTextLabel" parent="."]
 margin_left = 25.0
@@ -20,3 +22,20 @@ margin_top = 17.0
 margin_right = 514.0
 margin_bottom = 47.0
 text = "Lobby"
+
+[node name="StartLobby" type="Button" parent="."]
+margin_left = 558.0
+margin_top = 510.0
+margin_right = 678.0
+margin_bottom = 548.0
+text = "Start"
+
+[node name="ExitLobby" type="Button" parent="."]
+margin_left = 181.0
+margin_top = 506.0
+margin_right = 301.0
+margin_bottom = 544.0
+text = "Exit"
+
+[connection signal="pressed" from="StartLobby" to="." method="_on_start_lobby_pressed"]
+[connection signal="pressed" from="ExitLobby" to="." method="_on_exit_lobby_pressed"]
