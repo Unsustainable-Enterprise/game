@@ -1,8 +1,12 @@
 extends Node
 
 var user_name setget set_user_name, get_user_name
+
 var token setget set_token, get_token
+
 var participants setget set_participants, get_participants
+
+var is_host setget set_is_host, get_is_host
 
 func set_user_name(name):
 	user_name = name
@@ -23,3 +27,9 @@ func set_participants(participant_names):
 
 func get_participants():
    return participants
+
+func set_is_host(value):
+	is_host = value
+
+func get_is_host():
+   return is_host
