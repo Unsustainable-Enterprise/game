@@ -29,3 +29,9 @@ func join_lobby(user_name: String, pin: String) -> void:
 		}
     }
 	get_parent().send(joinJson)
+
+func leave_lobby() -> void:
+	var leftJson = {
+		"event": web_socket_events.LEAVE_LOBBY,
+	}
+	get_parent().send(leftJson)

@@ -2,6 +2,8 @@ extends Control
 
 onready var data_manager: Node = get_node("/root/DataManager")
 
+onready var web_socket_manager: Node = get_node("/root/WebSocketManager")
+
 export var participant_names_path: NodePath
 onready var participant_names: RichTextLabel = get_node(participant_names_path)
 
@@ -20,7 +22,7 @@ func _ready():
 	update_participants()
 
 func _on_exit_lobby_pressed():
-	pass # Replace with function body.
+	web_socket_manager.send_message.leave_lobby()
 
 
 func _on_start_lobby_pressed():
