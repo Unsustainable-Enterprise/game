@@ -17,13 +17,21 @@ func _ready():
 	else:
 		start_lobby.visible = false
 
-	var participants = data_manager.get_participants()
-	for name in participants:
-		participant_names.text += name + "\n"
+	update_participants()
 
 func _on_exit_lobby_pressed():
 	pass # Replace with function body.
 
 
 func _on_start_lobby_pressed():
-	pass # Replace with function body.
+	if(data_manager.get_is_host()):
+		if(data_manager.get_participants().size() > 1):
+			print("Starting game")
+		else:
+			print("Not enough players to start game")
+
+func update_participants():
+	var participants = data_manager.get_participants()
+	participant_names.text = ""
+	for name in participants:
+		participant_names.text += name + "\n"

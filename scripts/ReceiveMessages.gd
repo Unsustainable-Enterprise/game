@@ -15,8 +15,9 @@ func join_lobby(data: Dictionary):
 			print ("An unexpected error occured when trying to switch scenes")
 
 func participant_joined_lobby(data: Dictionary):
-	print("participant_joined_lobby")
-	print(data)
+	data_manager.set_participants(data.message.participants)
+	if(get_tree().current_scene.name == "Lobby"):
+		get_tree().get_root().get_node("Lobby").update_participants()
 
 func add_data_manager(token: String, user_name: String, participants: Array, is_host: bool, pin: String = ""):
 	if(is_host):

@@ -11,10 +11,10 @@ start_lobby_path = NodePath("StartLobby")
 exit_lobby_path = NodePath("ExitLobby")
 
 [node name="ParticipantNames" type="RichTextLabel" parent="."]
-margin_left = 25.0
-margin_top = 123.0
-margin_right = 993.0
-margin_bottom = 589.0
+margin_left = 27.0
+margin_top = 83.0
+margin_right = 995.0
+margin_bottom = 549.0
 
 [node name="LobbyTittle" type="Label" parent="."]
 margin_left = 463.0
