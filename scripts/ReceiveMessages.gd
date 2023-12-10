@@ -19,12 +19,15 @@ func participant_joined_lobby(data: Dictionary):
 	if(get_tree().current_scene.name == "Lobby"):
 		get_tree().get_root().get_node("Lobby").update_participants()
 
-func leave_lobby():
-	data_manager.set_token("")
-	data_manager.set_user_name("")
-	data_manager.set_participants([])
-	data_manager.set_is_host(false)
-	print("left lobby")
+func leave_lobby(data: Dictionary):
+	data_manager.clear_all()
+	if (data.message.is_host): 
+		if get_tree().change_scene("res://scenes/StartMenu.tscn") != OK:
+			print ("An unexpected error occured when trying to switch scenes")
+	else:
+		data_manager.set_participants(data.message.participants)
+		if(get_tree().current_scene.name == "Lobby"):
+			get_tree().get_root().get_node("Lobby").update_participants()
 
 func add_data_manager(token: String, user_name: String, participants: Array, is_host: bool, pin: String = ""):
 	if(is_host):

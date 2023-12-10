@@ -48,6 +48,8 @@ func _on_data():
 				receive_message.join_lobby(json.result)
 			web_socket_events.PARTICIPANT_JOINED_LOBBY:
 				receive_message.participant_joined_lobby(json.result)
+			web_socket_events.LEAVE_LOBBY:
+				receive_message.leave_lobby(json.result)
 			_:
 				print("Unknown event with data: ", json.result)
 

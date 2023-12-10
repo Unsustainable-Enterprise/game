@@ -23,6 +23,8 @@ func _ready():
 
 func _on_exit_lobby_pressed():
 	web_socket_manager.send_message.leave_lobby()
+	if get_tree().change_scene("res://scenes/StartMenu.tscn") != OK:
+		print ("An unexpected error occured when trying to switch scenes")
 
 
 func _on_start_lobby_pressed():

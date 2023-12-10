@@ -41,3 +41,10 @@ func set_pin(value):
 
 func get_pin():
    return pin
+
+func clear_all():
+	user_name = ""
+	token = ""
+	participants = []
+	is_host = false
+	pin = ""

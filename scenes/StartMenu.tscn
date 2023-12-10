@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://prefabs/StartGameUI.tscn" type="PackedScene" id=1]
+
+[node name="Scene1" type="Node2D"]
+
+[node name="StartGameUI" parent="." instance=ExtResource( 1 )]
