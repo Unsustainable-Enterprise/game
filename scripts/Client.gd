@@ -6,6 +6,8 @@ onready var send_message: Node = get_node(send_message_path)
 export var receive_message_path: NodePath
 onready var receive_message: Node = get_node(receive_message_path)
 
+var paths = load("res://configs/Paths.gd")
+
 var web_socket_events = load("res://scripts/WebSocketEvents.gd")
 
 var URL = "wss://localhost:3000"
