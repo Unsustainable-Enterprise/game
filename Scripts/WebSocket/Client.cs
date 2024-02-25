@@ -43,7 +43,7 @@ public class Client : Node2D
         SetProcess(false);
     }
 
-    private void OnConnected()
+    private void OnConnected(string protocol)
     {
         GD.Print("Connected to ");
         EmitSignal("WebSocketReady");
@@ -60,34 +60,13 @@ public class Client : Node2D
                 Dictionary<string, object>
             >(data);
 
-            switch (jsonData["event"])
+            if (jsonData.ContainsKey("event") == false)
             {
-                case WebSocketEvent.CREATE_PARTY:
-                    Receive
-                        .Lobby()
-                        .CreateParty(JsonConvert.DeserializeObject<ReceiveCreateParty>(data));
-                    break;
-                case WebSocketEvent.JOIN_LOBBY:
-                    // ReceiveMessage.Call("JoinLobby", json.Result);
-                    break;
-                // case WebSocketEvents.PARTICIPANT_JOINED_LOBBY:
-                //     ReceiveMessage.Call("ParticipantJoinedLobby", json.Result);
-                //     break;
-                // case WebSocketEvents.LEAVE_LOBBY:
-                //     ReceiveMessage.Call("LeaveLobby", json.Result);
-                //     break;
-                // case WebSocketEvents.START_GAME:
-                //     ReceiveMessage.Call("StartGame");
-                //     break;
-                // case WebSocketEvents.DISPLAY_QUESTION_RESULTS:
-                //     ReceiveMessage.Call("DisplayQuestionResults", json.Result);
-                //     break;
-                // case WebSocketEvents.ANSWER_QUESTION:
-                //     ReceiveMessage.Call("AnswerQuestion", json.Result);
-                //     break;
-                default:
-                    throw new Exception("Unknown event");
+                GD.Print("No event key found in JSON data");
+                return;
             }
+
+            Receive.ProcessEvent((string)jsonData["event"], data);
         }
         catch (Exception ex)
         {

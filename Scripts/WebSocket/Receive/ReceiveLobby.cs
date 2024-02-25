@@ -1,89 +1,68 @@
 using System.Collections.Generic;
 using Godot;
 
-public class ReceiveLobby : Node
+public class ReceiveLobby
 {
-    private Node dataManager;
+    private DataManager _dataManager;
+    private SceneManager _sceneManager;
 
-    // public override void _Ready()
-    // {
-    //     dataManager = GetNode<DataManager>("/root/DataManager");
-    // }
-
-    public void CreateParty(ReceiveCreateParty data)
+    public ReceiveLobby(DataManager dataManager, SceneManager sceneManager)
     {
-        GD.Print(data.Event);
-        GD.Print(data.Token);
-        GD.Print(data.Message.UserName);
-        // AddDataManager(
-        //     (string)data["token"],
-        //     (string)data["message.user_name"],
-        //     new List<string> { (string)data["message.user_name"] },
-        //     true,
-        //     (string)data["message.scenario"],
-        //     (int)data["message.pin"]
-        // );
-
-        // if (GetTree().ChangeScene("res://scenes/Lobby.tscn") != Error.Ok)
-        // {
-        //     GD.Print("An unexpected error occured when trying to switch scenes");
-        // }
+        _dataManager = dataManager;
+        _sceneManager = sceneManager;
     }
 
-    public void JoinLobby(Dictionary<string, object> data)
+    public void CreateParty(ReceiveBase<CreatePartyMessage> data)
     {
-        AddDataManager(
-            (string)data["token"],
-            (string)data["message.user_name"],
-            (List<string>)data["message.participants"],
-            false,
-            (string)data["message.scenario"]
+        _dataManager.AddDataManager(
+            data.Token,
+            data.Message.UserName,
+            new List<string>(),
+            true,
+            data.Message.Scenario,
+            data.Message.Pin
         );
 
-        if (GetTree().ChangeScene("res://scenes/Lobby.tscn") != (int)Godot.Error.Ok)
+        _sceneManager.ChangeScene(Scene.Lobby);
+    }
+
+    public void JoinLobby(ReceiveBase<JoinPartyMessage> data)
+    {
+        _dataManager.AddDataManager(
+            data.Token,
+            data.Message.UserName,
+            data.Message.Participants,
+            false,
+            data.Message.Scenario
+        );
+
+        _sceneManager.ChangeScene(Scene.Lobby);
+    }
+
+    public void ParticipantJoinedLobby(ReceiveBase<ParticipantJoinedMessage> data)
+    {
+        _dataManager.Participants = new List<string> { data.Message.Participants };
+
+        if (_sceneManager.GetSceneName() == Scene.Lobby.ToString())
         {
-            GD.Print("An unexpected error occured when trying to switch scenes");
+            // Update lobby names
         }
     }
 
-    public void ParticipantJoinedLobby(Dictionary<string, object> data)
+    public void LeaveParty(ReceiveBase<LeaveParty> data)
     {
-        dataManager.Call("SetParticipants", data["message.participants"]);
-        if (GetTree().CurrentScene.Name == "Lobby")
+        if (data.Message.IsHost)
         {
-            GetTree().Root.GetNode("Lobby").Call("UpdateParticipants");
-        }
-    }
-
-    public void LeaveLobby(Dictionary<string, object> data)
-    {
-        dataManager.Call("ClearAll");
-        if ((bool)data["message.is_host"])
-        {
-            if (GetTree().ChangeScene("res://scenes/StartMenu.tscn") != (int)Godot.Error.Ok)
-            {
-                GD.Print("An unexpected error occured when trying to switch scenes");
-            }
+            _dataManager.ClearAll();
+            _sceneManager.ChangeScene(Scene.StartMenu);
         }
         else
         {
-            dataManager.Call("SetParticipants", data["message.participants"]);
-            if (GetTree().CurrentScene.Name == "Lobby")
+            _dataManager.Participants = data.Message.Participants;
+            if (_sceneManager.GetSceneName() == Scene.Lobby.ToString())
             {
-                GetTree().Root.GetNode("Lobby").Call("UpdateParticipants");
+                // Update lobby names
             }
         }
-    }
-
-    private void AddDataManager(
-        string token,
-        string userName,
-        List<string> participants,
-        bool isHost,
-        string scenario,
-        int pin = 0
-    )
-    {
-        // Implement your logic here to add data to the data manager node
     }
 }

@@ -10,9 +10,15 @@ config_version=4
 
 [application]
 
-config/name="Game-c#"
+config/name="game"
 run/main_scene="res://Prefabs/WebSocket.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+DataManager="*res://Prefabs/DataManager.tscn"
+SceneManager="*res://Prefabs/SceneManager.tscn"
+WebSocket="*res://Prefabs/WebSocket.tscn"
 
 [gui]
 
