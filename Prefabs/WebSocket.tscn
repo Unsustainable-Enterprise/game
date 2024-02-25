@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/WebSocket/Client.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/WebSocket/Receive/Receive.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/WebSocket/Receive/ReceiveLobby.cs" type="Script" id=3]
+
+[node name="WebSocket" type="Node2D"]
+script = ExtResource( 1 )
+ReceievePath = NodePath("Receive")
+
+[node name="Receive" type="Node" parent="."]
+script = ExtResource( 2 )
+LobbyPath = NodePath("Lobby")
+
+[node name="Lobby" type="Node" parent="Receive"]
+script = ExtResource( 3 )
