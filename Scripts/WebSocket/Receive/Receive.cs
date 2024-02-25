@@ -6,17 +6,17 @@ public class Receive : Node
     private DataManager _dataManager;
     private SceneManager _sceneManager;
 
-    private ReceiveLobby ReceiveLobby;
+    private ReceiveParty ReceiveLobby;
 
     public override void _Ready()
     {
         _dataManager = GetNode<DataManager>(Paths.DataManager);
         _sceneManager = GetNode<SceneManager>(Paths.SceneManager);
 
-        ReceiveLobby = new ReceiveLobby(_dataManager, _sceneManager);
+        ReceiveLobby = new ReceiveParty(_dataManager, _sceneManager);
     }
 
-    public ReceiveLobby Lobby() => ReceiveLobby;
+    public ReceiveParty Lobby() => ReceiveLobby;
 
     public void ProcessEvent(string wsEvent, string data)
     {

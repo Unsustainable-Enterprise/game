@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Godot;
 
-public class ReceiveLobby
+public class ReceiveParty
 {
     private DataManager _dataManager;
     private SceneManager _sceneManager;
 
-    public ReceiveLobby(DataManager dataManager, SceneManager sceneManager)
+    public ReceiveParty(DataManager dataManager, SceneManager sceneManager)
     {
         _dataManager = dataManager;
         _sceneManager = sceneManager;
